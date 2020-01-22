@@ -19,5 +19,7 @@ namespace BookShelf.Data
         public DbSet<BookShelf.Models.Author> Author { get; set; }
 
         public DbSet<BookShelf.Models.Book> Book { get; set; }
+
+        public DbSet<BookShelf.Models.Comment> Comment { get; set; }
     }
 }

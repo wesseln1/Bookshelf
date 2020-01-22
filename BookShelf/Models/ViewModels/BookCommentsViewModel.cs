@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookShelf.Models
+namespace BookShelf.Models.ViewModel
 {
-    public class Book
+    public class BookCommentsViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -16,9 +16,6 @@ namespace BookShelf.Models
         public int YearPublished { get; set; }
         public int Rating { get; set; }
         public string Genre { get; set; }
-        public string ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
-
-        public List<Comment> Comments { get; set; }
+        public int CommentCount { get; set; }
     }
 }
