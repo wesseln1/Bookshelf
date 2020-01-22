@@ -69,6 +69,7 @@ namespace BookShelf.Controllers
         {
             var user = await GetCurrentUserAsync();
             comment.ApplicationUserId = user.Id;
+            comment.Date = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(comment);
@@ -92,8 +93,8 @@ namespace BookShelf.Controllers
             {
                 return NotFound();
             }
-            ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", comment.ApplicationUserId);
-            ViewData["BookId"] = new SelectList(_context.Book, "Id", "Id", comment.BookId);
+
+            ViewData["BookId"] = new SelectList(_context.Book, "Id", "Title", comment.BookId);
             return View(comment);
         }
 
@@ -102,7 +103,7 @@ namespace BookShelf.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Text,ApplicationUserId,BookId")] Comment comment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Text,BookId")] Comment comment)
         {
             if (id != comment.Id)
             {
@@ -129,7 +130,6 @@ namespace BookShelf.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", comment.ApplicationUserId);
             ViewData["BookId"] = new SelectList(_context.Book, "Id", "Id", comment.BookId);
             return View(comment);
         }

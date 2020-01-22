@@ -4,14 +4,16 @@ using BookShelf.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BookShelf.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200122152951_hasher")]
+    partial class hasher
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,7 +98,7 @@ namespace BookShelf.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "df563c8c-702c-4a67-b1e3-a5e26b2a7ac9",
+                            ConcurrencyStamp = "0a2b027b-335b-4c3f-b731-2d60a5d3f660",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "admin",
@@ -104,7 +106,7 @@ namespace BookShelf.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFh90ycgfIvcoBuZaLr4KOJ6c8UVFdnfxJ6LhToAjSDgr1F7D1xI+4u1khn36jYAUQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEASWm3x/Alqp6RXQjt2qIAsslQLLtdgAY9CzA7w8VPoMyqY+ECKVxVsDgn36OnSTlg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,
@@ -130,26 +132,6 @@ namespace BookShelf.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Author");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ApplicationUserId = "00000000-ffff-ffff-ffff-ffffffffffff",
-                            Name = "Jimmy John"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ApplicationUserId = "00000000-ffff-ffff-ffff-ffffffffffff",
-                            Name = "Jersey Mike"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ApplicationUserId = "00000000-ffff-ffff-ffff-ffffffffffff",
-                            Name = "Jared FFogle"
-                        });
                 });
 
             modelBuilder.Entity("BookShelf.Models.Book", b =>
@@ -184,38 +166,6 @@ namespace BookShelf.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Book");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ApplicationUserId = "00000000-ffff-ffff-ffff-ffffffffffff",
-                            AuthorId = 1,
-                            Genre = "Fantasy",
-                            Rating = 5,
-                            Title = "Free Smells",
-                            YearPublished = 1999
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ApplicationUserId = "00000000-ffff-ffff-ffff-ffffffffffff",
-                            AuthorId = 2,
-                            Genre = "Cooking",
-                            Rating = 10,
-                            Title = "Jersey Subs",
-                            YearPublished = 2001
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ApplicationUserId = "00000000-ffff-ffff-ffff-ffffffffffff",
-                            AuthorId = 1,
-                            Genre = "Instructional",
-                            Rating = 3,
-                            Title = "How to make a prison sandwich",
-                            YearPublished = 2015
-                        });
                 });
 
             modelBuilder.Entity("BookShelf.Models.Comment", b =>
@@ -244,32 +194,6 @@ namespace BookShelf.Migrations
                     b.HasIndex("BookId");
 
                     b.ToTable("Comment");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ApplicationUserId = "00000000-ffff-ffff-ffff-ffffffffffff",
-                            BookId = 1,
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Text = "I do love Jimmy Johns!"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ApplicationUserId = "00000000-ffff-ffff-ffff-ffffffffffff",
-                            BookId = 2,
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Text = "Firehouse subs is better!"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ApplicationUserId = "00000000-ffff-ffff-ffff-ffffffffffff",
-                            BookId = 3,
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Text = "Hes really get that footlong now..."
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
