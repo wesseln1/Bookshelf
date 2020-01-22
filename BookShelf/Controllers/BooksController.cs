@@ -95,6 +95,7 @@ namespace BookShelf.Controllers
         }
 
         // GET: Comments/Create
+        [HttpGet("books/CreateComment/{bookId}")]
         public async Task<IActionResult> CreateComment()
         {
             return View();
@@ -103,19 +104,19 @@ namespace BookShelf.Controllers
         // POST: Comments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost("books/CreateComment/{bookId}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateComment([FromRoute]int id, [Bind("Id,Text,BookId")] Comment comment)
+        public async Task<IActionResult> CreateComment([FromRoute]int bookId, [Bind("Id,Text,ApplicationUserId,BookId,Date")] Comment comment)
         {
             var user = await GetCurrentUserAsync();
             comment.ApplicationUserId = user.Id;
-            comment.BookId = id;
+            comment.BookId = bookId;
             comment.Date = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Books", new { id = bookId});
             }
             return View(comment);
         }
@@ -134,7 +135,7 @@ namespace BookShelf.Controllers
             
             if (book == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
             ViewData["AuthorId"] = new SelectList(_context.Author.Where(a => a.ApplicationUserId == user.Id), "Id", "Name", book.AuthorId);
             return View(book);

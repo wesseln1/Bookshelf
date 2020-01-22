@@ -27,7 +27,8 @@ namespace BookShelf.Controllers
         // GET: Comments
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Comment.Include(c => c.Book);
+            var user = await GetCurrentUserAsync();
+            var applicationDbContext = _context.Comment.Include(c => c.Book).Where(c => c.ApplicationUserId == user.Id);
             return View(await applicationDbContext.ToListAsync());
         }
 
